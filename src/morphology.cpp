@@ -57,7 +57,8 @@ Morphology::Morphology(const URI& source, unsigned int options)
     // mut::Morphology::applyModifiers
     if (options && (version() == MORPHOLOGY_VERSION_H5_1 || version() == MORPHOLOGY_VERSION_H5_1_1 || version() == MORPHOLOGY_VERSION_H5_2)) {
         mut::Morphology mutable_morph(*this);
-        mutable_morph.sanitize();
+        if (! (options & NO_SANITIZE))
+            mutable_morph.sanitize();
         mutable_morph.applyModifiers(options);
         _properties = std::make_shared<Property::Properties>(
             mutable_morph.buildReadOnly());

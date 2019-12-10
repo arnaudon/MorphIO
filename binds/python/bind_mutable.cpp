@@ -69,7 +69,8 @@ static void bind_mutable_module(py::module &m) {
                                "Returns the version")
 
         .def("write", &morphio::mut::Morphology::write,
-             "Write file to H5, SWC, ASC format depending on filename extension", "filename"_a)
+             "Write file to H5, SWC, ASC format depending on filename extension",
+             "filename"_a, "sanitize"_a=true)
 
         // Iterators
         .def("iter", [](morphio::mut::Morphology* morph, IterType type) {
