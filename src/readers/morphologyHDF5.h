@@ -14,11 +14,13 @@ namespace morphio {
 namespace readers {
 namespace h5 {
 Property::Properties load(const URI& uri);
+Property::Properties load(const HighFive::Group& group);
 
 class MorphologyHDF5
 {
 public:
     MorphologyHDF5(const std::string& uri) : _err(uri), _uri(uri){}
+    MorphologyHDF5(const HighFive::Group& group);
     virtual ~MorphologyHDF5();
     Property::Properties load();
 
@@ -28,7 +30,7 @@ private:
     void _resolveV1();
     bool _readV11Metadata();
     bool _readV2Metadata();
-    HighFive::DataSet _getStructureDataSet(size_t nSections);
+    HighFive::DataSet _getStructureDataSet();
     void _readPoints(int);
     int _readSections();
     void _readSectionTypes();
@@ -42,7 +44,7 @@ private:
                unsigned int expectedDimension,
                T& data);
 
-    std::unique_ptr<HighFive::File> _file;
+    const HighFive::Group _group;
 
     std::unique_ptr<HighFive::DataSet> _points;
     std::vector<size_t> _pointsDims;
