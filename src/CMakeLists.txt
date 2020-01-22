@@ -85,13 +85,13 @@ target_include_directories(morphio_static
   SYSTEM
   PUBLIC
    $<TARGET_PROPERTY:gsl-lite,INTERFACE_INCLUDE_DIRECTORIES>
-  PRIVATE
    $<TARGET_PROPERTY:HighFive,INTERFACE_INCLUDE_DIRECTORIES>
+   PRIVATE
    $<TARGET_PROPERTY:lexertl,INTERFACE_INCLUDE_DIRECTORIES>
   )
 
-target_link_libraries(morphio_static PUBLIC gsl-lite PRIVATE HighFive lexertl)
-target_link_libraries(morphio_shared PUBLIC gsl-lite PRIVATE HighFive lexertl)
+target_link_libraries(morphio_static PUBLIC gsl-lite PRIVATE lexertl HighFive)
+target_link_libraries(morphio_shared PUBLIC gsl-lite PRIVATE lexertl HighFive)
 
 install(
   # DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
